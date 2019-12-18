@@ -3,6 +3,7 @@
     <head>
         <title>Savey</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="styles.css">
         <style>
             * {
                 text-align: center;
@@ -11,14 +12,6 @@
                 max-width: 38rem;
                 padding: 2rem;
                 margin: auto;
-            }
-            footer {
-                padding-top: 70vh;
-                padding-bottom: 38px;
-
-            }
-            header { 
-                width: 100%;
             }
         </style>
     </head>
@@ -41,14 +34,52 @@
             </div>
 
             <div> 
-                <button id="gen-csv">CSV</button>
-                <button id="gen-ical">iCal</button>
-                <button id="gen-gcal">gCal</button>
+                <a href="#" class="button nav-link" id="gen-csv">
+                    <div class="bottom"></div>
+                    <div class="top">
+                        <div class="label">CSV</div>
+                        
+                        <div class="button-border button-border-left"></div>
+                        <div class="button-border button-border-top"></div>
+                        <div class="button-border button-border-right"></div>
+                        <div class="button-border button-border-bottom"></div>
+                    </div>
+                </a>
+
+                <a href="#" class="button nav-link" id="gen-ical">
+                    <div class="bottom"></div>
+                    <div class="top">
+                        <div class="label">iCal</div>
+                        <div class="button-border button-border-left"></div>
+                        <div class="button-border button-border-top"></div>
+                        <div class="button-border button-border-right"></div>
+                        <div class="button-border button-border-bottom"></div>
+                    </div>
+                </a>
+
+                <a href="#" class="button nav-link" id="gen-gcal">
+                    <div class="bottom"></div>
+                    <div class="top">
+                        <div class="label">gCal</div>
+                        <div class="button-border button-border-left"></div>
+                        <div class="button-border button-border-top"></div>
+                        <div class="button-border button-border-right"></div>
+                        <div class="button-border button-border-bottom"></div>
+                    </div>
+                </a>
             </div>
             <div id="result"></div>
         </main>
         <footer>
-            <a href="https://twitter.com/mattjbones">mattjbones</a> wrote it
+            <div>
+                <a href="https://twitter.com/mattjbones">mattjbones</a> wrote it.
+            </div>
+            <div> 
+                Button CSS taken from <a href="https://codepen.io/halvo/pen/pRdeja">here</a>.
+            </div>
+            <div>
+                Color pallette created with <a href="https://www.canva.com/colors/color-wheel/">Canva's Colour Wheel</a>, check it out. 
+            </div>
         </footer>
 
         <script>
