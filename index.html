@@ -17,12 +17,11 @@
     </head>
     <body>
         <main>
-            <h1>Saver: 52 week challenge, automated</h1>
-            
-            <div>
-               Day:  
-                <select id="day-sel">
-                    <option value="0"></option>
+            <h1>52 week challenge: Calanders</h1>
+            <p><em>Each week, save a little more - &pound;1 to be precise.</em></p> 
+            <div class="custom-dropdown">
+                <select id="day-sel" required>
+                    <option hidden value="0">Select start day</option>
                     <option value="1">Monday</option>
                     <option value="2">Tuesday</option>
                     <option value="3">Wednesday</option>
@@ -33,7 +32,7 @@
                 </select>
             </div>
 
-            <div> 
+            <div class="buttons-container"> 
                 <a href="#" class="button nav-link" id="gen-csv">
                     <div class="bottom"></div>
                     <div class="top">
@@ -68,6 +67,18 @@
                     </div>
                 </a>
             </div>
+
+            <div class="uwot-container">
+                <p>
+                    Generate a Calendar for the app of your choosing with an entry, on a day of your choosing, 
+                    reminding you to transfer money as part of the <span class="red">52 week saving challenge</span>. 
+                </p>
+                <p>
+                    If you start today, with just <span class="red">&pound;1, $1, &euro;1 or &sect;1</span> by the time 52 weeks have passed 
+                    you'll have saved 1,379 (currency of your choice). 
+                </p>
+            </div>
+
             <div id="result"></div>
         </main>
         <footer>
@@ -79,6 +90,9 @@
             </div>
             <div>
                 Color pallette created with <a href="https://www.canva.com/colors/color-wheel/">Canva's Colour Wheel</a>, check it out. 
+            </div>
+            <div>
+                Selector styling adapted from <a href="https://speckyboy.com/open-source-css-javascript-select-box-snippets/">Non-Sucky HTML Dropdowns</a>.
             </div>
         </footer>
 
@@ -208,8 +222,7 @@
             const gcalButton = document.getElementById('gen-gcal');
             gcalButton.onclick = function () {
                 const data = generateData();
-                alert("Coming soon! For now, here's a dump of the data structure");
-                print(JSON.stringify(data, undefined, '<br>'));
+                alert("Coming soon!");
             };
             
             const result = document.getElementById('result');
