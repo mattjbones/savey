@@ -29,6 +29,9 @@ body {
 footer {
     margin-top: 20vh;
     padding-bottom: 20px;
+    max-width: 38rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 header { 
@@ -45,9 +48,6 @@ h1 {
 .uwot-container
 { 
     margin: 10px;
-}
-
-.uwot-container { 
 }
 
 .buttons-container { 
