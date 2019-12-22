@@ -22,7 +22,6 @@ const getIcalDateString = function (date){
 }
 
 const generateData = function (){
-
     const todaysDate = new Date();
     const startDay = getSelectedDay() || defaultDay;
     const today = todaysDate.getDay();
@@ -35,20 +34,21 @@ const generateData = function (){
     let total = 1; 
     while (data.length < 53){
         const week = data.length;
+        const amount = week + 1;
         const difference = (week) * 60 * 60 * 24 * 7 * 1000;
         const weekDate = new Date(startDate.getTime() + difference); 
 
         total += week;
 
         const line = {
-            subject:`${subjectPrefix}: Transfer \u00A3${week}`,   
+            subject:`${subjectPrefix}: Transfer \u00A3${amount}`,   
             startDate: weekDate,
             startTime: defaultStart,
             endDate: weekDate,
             endTime: defaultEnd,
             allDay: false, 
             description: `Week ${week}: total saved ${total}`,
-            uid: `${weekDate.getTime()}-${week}-${total}`
+            uid: `${weekDate.getTime()}-${week}-${total}-${amount}`
         };
 
         data.push(line);
@@ -57,7 +57,9 @@ const generateData = function (){
 };
 
 const downloadFile = function (filename, data) {
+    // delay long enough to show the animation on mobile
     window.setTimeout(function (){
+
         var blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
         if(window.navigator.msSaveOrOpenBlob) {
             window.navigator.msSaveBlob(blob, filename);
@@ -76,10 +78,10 @@ const downloadFile = function (filename, data) {
 const csvButton = document.getElementById('gen-csv');            
 csvButton.onclick = function (e) {
     event.preventDefault();
-    const csvHeader = ["Subject", "Start Date", "Start Time", "End Date", "End Time", "All Day", "Description", "Location", "UID" ];
+    const csvHeader = ["Subject", "Start Date", "Start Time", "End Date", "End Time", "All Day", "Description", "UID" ];
     const csvSaveData = generateData()
         .map(({subject, startDate, startTime, endDate, endTime, allDay, description, uid}) =>
-            ([subject, startDate, startTime, endDate, endTime, allDay, description, undefined, uid]) 
+            ([subject, startDate, startTime, endDate, endTime, allDay, description, uid]) 
             );
     const final = [ csvHeader, ...csvSaveData ];
     downloadFile('52 week challenge.csv', final.map(e => e.join(",")).join("\n"));
@@ -123,15 +125,9 @@ icalButton.onclick = function() {
     downloadFile(`${subjectPrefix}.ics`, final);
 };
 
-
 const gcalButton = document.getElementById('gen-gcal');
 gcalButton.onclick = function () {
     event.preventDefault();
     const data = generateData();
     alert("Coming soon!");
-};
-
-const result = document.getElementById('result');
-const print = function (string){
-    result.innerHTML += `<p>${string}</p>`;
 };
