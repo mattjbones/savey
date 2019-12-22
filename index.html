@@ -119,7 +119,7 @@
                     Each week put away an increasing (or decreasing) amount of mouney, for a year, with the aim of building a nice little pot of money. 
                 </p>
                 <p>
-                    If you start today, with just <span class="red">&pound;1, $1, &euro;1 or &sect;1</span> by the time 52 weeks have passed 
+                    If you start today, with just <span class="red">&pound;1</span>, <span class="red">$1</span>, <span class="red">&euro;1</span> or <span class="red">&sect;1</span> by the time 52 weeks have passed 
                     you'll have saved <span class="red">&pound;1,379</span> (or currency of your choice). 
                 </p>
             </div>
@@ -201,7 +201,7 @@
             };
 
             const downloadFile = function (filename, data) {
-                requestAnimationFrame(function (){
+                window.setTimeout(function (){
                     var blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
                     if(window.navigator.msSaveOrOpenBlob) {
                         window.navigator.msSaveBlob(blob, filename);
@@ -214,7 +214,7 @@
                         elem.click();         
                         document.body.removeChild(elem)
                     }
-                });
+                }, 250);
             };
 
             const csvButton = document.getElementById('gen-csv');            
