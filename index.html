@@ -13,6 +13,47 @@
                 padding: 2rem;
                 margin: auto;
             }
+            html {
+                border: 0;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: auto;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: #702ACD;
+                padding: 0;
+                margin: 0;
+                height: auto;
+                width: 100%;
+                font-size: larger;
+                color: #1ecbe1;
+                font-family: sans-serif;
+            }
+
+            footer {
+                margin-top: 20vh;
+                padding-bottom: 20px;
+                max-width: 38rem;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: small;
+            }
+
+            header { 
+                width: 100%;
+            }
+
+            h1 { 
+                color: #1ecbe1;
+                font-family: sans-serif;
+                margin-bottom: 0;
+            }
+
         </style>
     </head>
     <body>
@@ -30,6 +71,7 @@
                     <option value="6">Saturday</option>
                     <option value="7">Sunday</option>
                 </select>
+                <!-- add input for "reverse" mode -->
             </div>
 
             <div class="buttons-container"> 
@@ -74,8 +116,11 @@
                     reminding you to transfer money as part of the <span class="red">52 week saving challenge</span>. 
                 </p>
                 <p>
+                    Each week put away an increasing (or decreasing) amount of mouney, for a year, with the aim of building a nice little pot of money. 
+                </p>
+                <p>
                     If you start today, with just <span class="red">&pound;1, $1, &euro;1 or &sect;1</span> by the time 52 weeks have passed 
-                    you'll have saved 1,379 (currency of your choice). 
+                    you'll have saved <span class="red">&pound;1,379</span> (or currency of your choice). 
                 </p>
             </div>
 
@@ -83,13 +128,13 @@
         </main>
         <footer>
             <div>
-                <a href="https://twitter.com/mattjbones">mattjbones</a> wrote it.
+                Made with &#x2661; by <a href="https://twitter.com/mattjbones">mattjbones</a>.
             </div>
             <div> 
                 Button CSS taken from <a href="https://codepen.io/halvo/pen/pRdeja">here</a>.
             </div>
             <div>
-                Color pallette created with <a href="https://www.canva.com/colors/color-wheel/">Canva's Colour Wheel</a>, check it out. 
+                Colour palette created with <a href="https://www.canva.com/colors/color-wheel/">Canva's Colour Wheel</a>, check it out. 
             </div>
             <div>
                 Selector styling adapted from <a href="https://speckyboy.com/open-source-css-javascript-select-box-snippets/">Non-Sucky HTML Dropdowns</a>.
@@ -166,12 +211,13 @@
                     elem.download = filename;        
                     document.body.appendChild(elem);
                     elem.click();        
-                    document.body.removeChild(elem);
+                    requestAnimationFrame(function (){ document.body.removeChild(elem)});
                 }
             };
 
             const csvButton = document.getElementById('gen-csv');            
-            csvButton.onclick = function () {
+            csvButton.onclick = function (e) {
+                event.preventDefault();
                 const csvHeader = ["Subject", "Start Date", "Start Time", "End Date", "End Time", "All Day", "Description", "Location", "UID" ];
                 const csvSaveData = generateData()
                     .map(({subject, startDate, startTime, endDate, endTime, allDay, description, uid}) =>
@@ -183,6 +229,7 @@
 
             const icalButton = document.getElementById('gen-ical');
             icalButton.onclick = function() {
+                event.preventDefault();
                 const data = generateData();
                 const header = [
                     "BEGIN:VCALENDAR",
@@ -221,6 +268,7 @@
             
             const gcalButton = document.getElementById('gen-gcal');
             gcalButton.onclick = function () {
+                event.preventDefault();
                 const data = generateData();
                 alert("Coming soon!");
             };
