@@ -125,9 +125,9 @@ const generateGcal = function () {
     alert("Coming soon!");
 };
 
-const addFileData = function (element) {
+const addFileData = function (element, mimeType) {
     return function (filename, data){
-        var blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
+        var blob = new Blob([data], { type: `${mimeType}; charset=utf-8;` });
         element.href = window.URL.createObjectURL(blob);
         element.download = filename;        
     }
@@ -140,5 +140,5 @@ const gcalButton = document.getElementById('gen-gcal');
 const icalButton = document.getElementById('gen-ical');
 const data = generateData();
 
-const icalDownloadFile = addFileData(icalButton);
+const icalDownloadFile = addFileData(icalButton, "text/calendar");
 generateIcal(data, icalDownloadFile);
