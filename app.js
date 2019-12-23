@@ -70,14 +70,12 @@ const downloadFile = function (filename, data) {
             elem.download = filename;        
             document.body.appendChild(elem);
             elem.click();         
-            document.body.removeChild(elem)
+            document.body.removeChild(elem);
         }
     }, 250);
 };
 
-const csvButton = document.getElementById('gen-csv');            
-csvButton.onclick = function (e) {
-    event.preventDefault();
+const generateCsv = function (data, downloadFile) {
     const csvHeader = ["Subject", "Start Date", "Start Time", "End Date", "End Time", "All Day", "Description", "UID" ];
     const csvSaveData = generateData()
         .map(({subject, startDate, startTime, endDate, endTime, allDay, description, uid}) =>
@@ -87,10 +85,7 @@ csvButton.onclick = function (e) {
     downloadFile('52 week challenge.csv', final.map(e => e.join(",")).join("\n"));
 };
 
-const icalButton = document.getElementById('gen-ical');
-icalButton.onclick = function() {
-    event.preventDefault();
-    const data = generateData();
+const generateIcal = function(data, downloadFile) {
     const header = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
@@ -125,9 +120,26 @@ icalButton.onclick = function() {
     downloadFile(`${subjectPrefix}.ics`, final);
 };
 
-const gcalButton = document.getElementById('gen-gcal');
-gcalButton.onclick = function () {
+const generateGcal = function () {
     event.preventDefault();
     const data = generateData();
     alert("Coming soon!");
 };
+
+const addFileData = function (element) {
+    return function (filename, data){
+        var blob = new Blob([data], { type: 'text/csv;charset=utf-8;' });
+        element.href = window.URL.createObjectURL(blob);
+        element.download = filename;        
+    }
+}
+
+
+
+const csvButton = document.getElementById('gen-csv');            
+const gcalButton = document.getElementById('gen-gcal');
+const icalButton = document.getElementById('gen-ical');
+const data = generateData();
+
+const icalDownloadFile = addFileData(icalButton);
+generateIcal(data, icalDownloadFile);
