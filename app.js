@@ -12,7 +12,7 @@ const getCsvDateString = function (date){
 }
 
 const getIcalDateString = function (date){
-    const month = date.getMonth() + 1
+    const month = date.getMonth() + 1;
     const monthString = month < 10 ? "0" + month : "" + month;
 
     const day = date.getDate();
@@ -117,12 +117,11 @@ const generateIcal = function(data, downloadFile) {
         ...data.map(entry => createEntry(entry).join('\r\n')),
         footer
     ].join('\r\n');
-    downloadFile(`${subjectPrefix}.ics`, final);
+    downloadFile(`${subjectPrefix.replace(/ /g, '_')}.ics`, final);
 };
 
 const generateGcal = function () {
     event.preventDefault();
-    const data = generateData();
     alert("Coming soon!");
 };
 
